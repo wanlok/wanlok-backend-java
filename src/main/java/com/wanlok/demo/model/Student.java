@@ -1,32 +1,77 @@
 package com.wanlok.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
-    private Integer student_id;
+    @Column(name = "student_id")
+    @JsonProperty("student_id")
+    private Integer studentId;
 
-    private String student_name;
+    @Column(name = "student_name")
+    @JsonProperty("student_name")
+    private String studentName;
+
+//    @OneToMany
+//    @JoinColumn(name="student_id")
+//    private List<StudentCourse> studentCourses;
+
+    @ManyToMany(targetEntity = Course.class, cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "student_course",
+        joinColumns = { @JoinColumn(name = "student_id") },
+        inverseJoinColumns = { @JoinColumn(name = "course_id") }
+    )
+    @JsonProperty("courses")
+    private List<Course> courses;
 
     public Student() {
 
     }
 
-    public Integer getStudent_id() {
-        return student_id;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public String getStudent_name() {
-        return student_name;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setStudent_name(String student_name) {
-        this.student_name = student_name;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+//    public List<StudentCourse> getStudentCourses() {
+//        return studentCourses;
+//    }
+//
+//    public void setStudentCourses(List<StudentCourse> studentCourses) {
+//        this.studentCourses = studentCourses;
+//    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", courses=" + courses +
+                '}';
     }
 }

@@ -1,33 +1,37 @@
 package com.wanlok.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "student_course")
 public class StudentCourse {
     @Id
-    private Integer student_id;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @Id
-    private Integer course_id;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public StudentCourse() {
 
     }
 
-    public Integer getStudent_id() {
-        return student_id;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Integer getCourse_id() {
-        return course_id;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourse_id(Integer course_id) {
-        this.course_id = course_id;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

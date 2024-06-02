@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(
     value = "student"
@@ -19,6 +21,20 @@ public class StudentController {
     )
     public Iterable<Student> get() {
         return studentRepository.findAll();
+    }
+
+    @RequestMapping(
+        value = "/{id}",
+        method = { RequestMethod.GET },
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public Student getStudent(@PathVariable("id") Integer student_id) {
+        Optional<Student> optional = studentRepository.findById(student_id);
+        Student student = null;
+        if (optional.isPresent()) {
+            student = optional.get();
+        }
+        return student;
     }
 
     @RequestMapping(

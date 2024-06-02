@@ -1,4 +1,4 @@
-package com.wanlok.demo.model;
+package com.wanlok.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

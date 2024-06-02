@@ -1,4 +1,4 @@
-package com.wanlok.demo;
+package com.wanlok.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
